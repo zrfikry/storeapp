@@ -1,4 +1,4 @@
-export default function LoadingProduct() {
+const LoadingProduct = () => {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20">
       <main className="flex flex-col gap-6 row-start-2 items-start w-full max-w-4xl animate-pulse">
@@ -14,5 +14,7 @@ export default function LoadingProduct() {
         </div>
       </main>
     </div>
-  );
+  )
 }
+
+export default LoadingProduct

@@ -79,6 +79,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - Extracted `CartHeaderControls` into its own component for clarity and reuse.
 - Implemented SSR-safe persistence using `redux-persist` with a no-op storage on the server and Web Storage on the client.
 - Added JSDoc summary comments to all functions, components, hooks and reducers across the modified codebase to improve maintainability and onboarding.
+- Introduced a minimal i18n layer with locale JSON (English only) and replaced inline UI strings accordingly.
+
+### Internationalization (i18n)
+- Locale files live in `src/i18n/locales/` (currently only `en.json`).
+- Use the helper `t(key)` from `src/i18n` in server or client code to fetch a string.
+- A lightweight `I18nProvider` is wired globally in `src/app/Providers.tsx` for future multi-locale support.
+- Example usage:
+  - `t('home.latestProducts')`
+  - `t('cart.empty')`
 
 ### Notable technical decisions
 - Read-only Product API: Create/Update/Delete product endpoints throw explicit errors because DummyJSON does not persist mutations reliably for this demo.
@@ -93,4 +102,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - Cart helpers: `src/modules/transaction/helpers.ts`
 - Transaction UI: `src/modules/transaction/components/*`
 - Providers: `src/app/Providers.tsx`
+- i18n: `src/i18n/*`
 - Pages/Layout: `src/app/page.tsx`, `src/app/layout.tsx`, `src/app/products/[slug]/page.tsx`

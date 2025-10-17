@@ -43,27 +43,8 @@
   --accent: #e9a6b5;
   --accent-contrast: #3a2d32;
 }
-.theme-dark {
-  --background: #140a13;
-  --foreground: #fbe9ef;
-  --surface: #1e121c;
-  --surface-border: #3a2634;
-  --muted: #caa5b0;
-  --accent: #c58aa0;
-  --accent-contrast: #140a13;
-}
 
-/* Tailwind dark mode compatibility: alias classes */
-.light {
-  --background: #fff6f8;
-  --foreground: #3a2d32;
-  --surface: #ffffff;
-  --surface-border: #e8dfe3;
-  --muted: #7a5a65;
-  --accent: #e9a6b5;
-  --accent-contrast: #3a2d32;
-}
-.dark {
+.theme-dark {
   --background: #140a13;
   --foreground: #fbe9ef;
   --surface: #1e121c;

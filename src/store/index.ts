@@ -1,9 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux'
-import cartReducer from '../modules/transaction/state/cartSlice'
-import themeReducer from '../modules/common/state/themeSlice'
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
+
+import themeReducer from '../modules/common/state/themeSlice'
+import cartReducer from '../modules/transaction/state/cartSlice'
 
 // Safe storage for SSR (noop on server)
 /**

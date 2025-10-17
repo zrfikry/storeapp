@@ -1,4 +1,4 @@
-import type { Product } from "_/modules/product/dto";
+import type { Product } from '_/modules/product/dto'
 
 export type CartItem = {
   product: Product;
@@ -12,12 +12,12 @@ export type CartItem = {
  * @param currency Optional ISO 4217 currency code (default: USD).
  * @returns The formatted currency string.
  */
-export function formatCurrency(amount: number, locale = "en-US", currency = "USD"): string {
+export function formatCurrency(amount: number, locale = 'en-US', currency = 'USD'): string {
   try {
-    return new Intl.NumberFormat(locale, { style: "currency", currency }).format(amount);
+    return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount)
   } catch {
     // Fallback simple formatting
-    return `$${amount.toFixed(2)}`;
+    return `$${amount.toFixed(2)}`
   }
 }
 
@@ -27,7 +27,7 @@ export function formatCurrency(amount: number, locale = "en-US", currency = "USD
  * @returns The subtotal amount.
  */
 export function calcSubtotal(items: CartItem[]): number {
-  return items.reduce((sum, it) => sum + it.product.price * it.qty, 0);
+  return items.reduce((sum, it) => sum + it.product.price * it.qty, 0)
 }
 
 /**
@@ -36,7 +36,7 @@ export function calcSubtotal(items: CartItem[]): number {
  * @returns The total amount.
  */
 export function calcTotal(items: CartItem[]): number {
-  return calcSubtotal(items);
+  return calcSubtotal(items)
 }
 
 /**
@@ -46,5 +46,5 @@ export function calcTotal(items: CartItem[]): number {
  * @returns The index in the array or -1 if not found.
  */
 export function findItemIndex(items: CartItem[], productId: number): number {
-  return items.findIndex((it) => it.product.id === productId);
+  return items.findIndex((it) => it.product.id === productId)
 }

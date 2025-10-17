@@ -18,7 +18,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
  * - Sizes: sm | md | lg
  * - Honors disabled + loading states and supports full width.
  */
-export default function Button({
+const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   size = 'md',
   fullWidth = false,
@@ -27,7 +27,7 @@ export default function Button({
   disabled,
   children,
   ...rest
-}: ButtonProps) {
+}) => {
   const base = 'inline-flex items-center justify-center rounded transition select-none whitespace-nowrap cursor-pointer'
 
   const sizeCls: Record<ButtonSize, string> = {
@@ -65,3 +65,5 @@ export default function Button({
     </button>
   )
 }
+
+export default Button

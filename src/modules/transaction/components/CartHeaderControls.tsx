@@ -1,12 +1,13 @@
 'use client'
 
 import React from 'react'
-import CartButton from "./CartButton";
+
+import CartButton from './CartButton'
 
 /**
  * Header controls for the cart, dispatching a toggle event on click.
  */
-export default function CartHeaderControls() {
+const CartHeaderControls: React.FC = () => {
   const onClick = React.useCallback(() => {
     window.dispatchEvent(new Event('cart:toggle'))
   }, [])
@@ -14,3 +15,5 @@ export default function CartHeaderControls() {
     <CartButton onClick={onClick} />
   )
 }
+
+export default CartHeaderControls

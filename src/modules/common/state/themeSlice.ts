@@ -11,7 +11,7 @@ const detectInitialMode = (): ThemeMode => {
   try {
     const stored = window.localStorage.getItem('theme') as ThemeMode | null
     if (stored === 'light' || stored === 'dark') return stored
-  } catch {}
+  } catch { /* empty */ }
   const prefersDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   return prefersDark ? 'dark' : 'light'
 }

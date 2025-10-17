@@ -1,13 +1,14 @@
 'use client'
 
 import React from 'react'
+
 import { useAppSelector } from '_/store'
 
 /**
  * Syncs the current theme mode from Redux with the <html> element classes
  * and mirrors it into localStorage under key `theme` for fast first paint.
  */
-export default function ThemeProvider({ children }: { children: React.ReactNode }) {
+const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const mode = useAppSelector((s) => s.theme.mode)
 
   React.useEffect(() => {
@@ -23,3 +24,5 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
 
   return <>{children}</>
 }
+
+export default ThemeProvider

@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import type { Product } from '_/modules/product/dto'
+
 import type { CartItem } from '../helpers'
 
 export type CartState = {
@@ -14,10 +16,6 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    /**
-     * Replace the entire cart state (used during persistence rehydration).
-     */
-    hydrate: (_state, action: PayloadAction<CartState>) => action.payload,
     /**
      * Add a product to the cart or increase its quantity if it already exists.
      */
@@ -41,18 +39,18 @@ const cartSlice = createSlice({
      */
     increase: (state, action: PayloadAction<{ productId: number; amount?: number }>) => {
       const { productId, amount = 1 } = action.payload
-      const it = state.items.find(i => i.product.id === productId)
-      if (it) it.qty += Math.max(1, amount)
+      const item = state.items.find(i => i.product.id === productId)
+      if (item) item.qty += Math.max(1, amount)
     },
     /**
      * Decrease the quantity of a product and remove it if it reaches zero.
      */
     decrease: (state, action: PayloadAction<{ productId: number; amount?: number }>) => {
       const { productId, amount = 1 } = action.payload
-      const it = state.items.find(i => i.product.id === productId)
-      if (it) {
-        it.qty = Math.max(0, it.qty - Math.max(1, amount))
-        if (it.qty === 0) {
+      const item = state.items.find(i => i.product.id === productId)
+      if (item) {
+        item.qty = Math.max(0, item.qty - Math.max(1, amount))
+        if (item.qty === 0) {
           state.items = state.items.filter(i => i.product.id !== productId)
         }
       }
@@ -62,10 +60,10 @@ const cartSlice = createSlice({
      */
     setQty: (state, action: PayloadAction<{ productId: number; qty: number }>) => {
       const { productId, qty } = action.payload
-      const it = state.items.find(i => i.product.id === productId)
-      if (it) {
-        it.qty = Math.max(0, qty)
-        if (it.qty === 0) {
+      const item = state.items.find(i => i.product.id === productId)
+      if (item) {
+        item.qty = Math.max(0, qty)
+        if (item.qty === 0) {
           state.items = state.items.filter(i => i.product.id !== productId)
         }
       }
@@ -79,6 +77,6 @@ const cartSlice = createSlice({
   },
 })
 
-export const { add, remove, increase, decrease, setQty, clear, hydrate } = cartSlice.actions
+export const { add, remove, increase, decrease, setQty, clear } = cartSlice.actions
 
 export default cartSlice.reducer

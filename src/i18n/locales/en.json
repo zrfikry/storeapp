@@ -1,0 +1,31 @@
+{
+  "common": {
+    "appTitle": "Simple Store",
+    "appTitleDetailed": "Simple Store by Zakky",
+    "appDescription": "A simple e-commerce store built with Next.js, Redux, TypeScript, Tailwind CSS, and Redux-persist.",
+    "back": "← Back",
+    "noImage": "No image",
+    "openCart": "Open cart",
+    "toggleTheme": "Toggle theme",
+    "checkout": "Checkout",
+    "clear": "Clear",
+    "close": "Close",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "uncategorized": "Uncategorized"
+  },
+  "home": {
+    "latestProducts": "Latest Products",
+    "noProducts": "No products to show right now."
+  },
+  "product": {
+    "addToCart": "Add to cart"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty.",
+    "decrease": "Decrease",
+    "increase": "Increase",
+    "remove": "Remove"
+  }
+}

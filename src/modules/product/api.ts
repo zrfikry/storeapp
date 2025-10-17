@@ -1,5 +1,6 @@
-import { http } from "_/lib/http";
-import type { Product, CreateProduct, UpdateProduct } from "./dto";
+import { http } from '_/lib/http'
+
+import type { Product } from './dto'
 
 // DummyJSON product type (partial)
 type DummyProduct = {
@@ -18,7 +19,7 @@ type DummyProduct = {
  * @returns The mapped Product.
  */
 function mapDummyToProduct(p: DummyProduct): Product {
-  const images = p.images && p.images.length > 0 ? p.images : (p.thumbnail ? [p.thumbnail] : []);
+  const images = p.images && p.images.length > 0 ? p.images : (p.thumbnail ? [p.thumbnail] : [])
   return {
     id: p.id,
     title: p.title,
@@ -27,10 +28,10 @@ function mapDummyToProduct(p: DummyProduct): Product {
     images,
     category: {
       id: 0,
-      name: p.category ?? "",
-      image: p.thumbnail ?? images[0] ?? "",
+      name: p.category ?? '',
+      image: p.thumbnail ?? images[0] ?? '',
     },
-  };
+  }
 }
 
 /**
@@ -40,27 +41,27 @@ function mapDummyToProduct(p: DummyProduct): Product {
  */
 export async function getProducts(params?: {
   limit?: number;
-  offset?: number; // mapped to DummyJSON 'skip'
-  title?: string; // when provided, use /products/search?q=
-  price_min?: number; // not supported in DummyJSON, ignored
-  price_max?: number; // not supported in DummyJSON, ignored
-  categoryId?: number; // not directly supported without slug, ignored here
+  offset?: number;
+  title?: string;
+  price_min?: number;
+  price_max?: number;
+  categoryId?: number;
 }): Promise<Product[]> {
-  const { limit, offset, title } = params || {};
+  const { limit, offset, title } = params || {}
 
   if (title && title.trim().length > 0) {
     const { data } = await http.get<{ products: DummyProduct[] }>(
       `https://dummyjson.com/products/search`,
       { params: { q: title, limit, skip: offset } }
-    );
-    return (data.products || []).map(mapDummyToProduct);
+    )
+    return (data.products || []).map(mapDummyToProduct)
   }
 
   const { data } = await http.get<{ products: DummyProduct[] }>(
     `https://dummyjson.com/products`,
     { params: { limit, skip: offset } }
-  );
-  return (data.products || []).map(mapDummyToProduct);
+  )
+  return (data.products || []).map(mapDummyToProduct)
 }
 
 /**
@@ -69,51 +70,6 @@ export async function getProducts(params?: {
  * @returns The mapped Product.
  */
 export async function getProduct(id: number): Promise<Product> {
-  const { data } = await http.get<DummyProduct>(`https://dummyjson.com/products/${id}`);
-  return mapDummyToProduct(data);
-}
-
-// The following mutating endpoints are not supported by DummyJSON in a persistent way for this app.
-// To keep API surface, we throw to indicate unsupported operations.
-/**
- * Unsupported: Create a product (DummyJSON is read-only for this demo).
- * @throws Always throws to indicate unsupported operation.
- */
-export async function createProduct(_data: CreateProduct, _token?: string): Promise<Product> {
-  throw new Error("createProduct is not supported with DummyJSON data source");
-}
-
-/**
- * Unsupported: Update a product (DummyJSON is read-only for this demo).
- * @throws Always throws to indicate unsupported operation.
- */
-export async function updateProduct(_id: number, _data: UpdateProduct, _token?: string): Promise<Product> {
-  throw new Error("updateProduct is not supported with DummyJSON data source");
-}
-
-/**
- * Unsupported: Delete a product (DummyJSON is read-only for this demo).
- * @throws Always throws to indicate unsupported operation.
- */
-export async function deleteProduct(_id: number, _token?: string): Promise<void> {
-  throw new Error("deleteProduct is not supported with DummyJSON data source");
-}
-
-/**
- * Fetch products by category from DummyJSON.
- * Note: The current signature accepts a numeric categoryId for backward compatibility.
- * @param categoryId Category identifier (used as path segment).
- * @param params Optional pagination.
- * @returns Array of mapped products.
- */
-export async function getProductsByCategory(
-  categoryId: number,
-  params?: { limit?: number; offset?: number }
-): Promise<Product[]> {
-  const { limit, offset } = params || {};
-  const { data } = await http.get<{ products: DummyProduct[] }>(
-    `https://dummyjson.com/products/category/${categoryId}`,
-    { params: { limit, skip: offset } }
-  );
-  return (data.products || []).map(mapDummyToProduct);
+  const { data } = await http.get<DummyProduct>(`https://dummyjson.com/products/${id}`)
+  return mapDummyToProduct(data)
 }

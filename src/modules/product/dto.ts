@@ -1,5 +1,4 @@
 // Product-related DTOs and types
-
 export type Category = {
   id: number;
   name: string;
@@ -18,13 +17,3 @@ export type Product = {
   creationAt?: string;
   updatedAt?: string;
 };
-
-export type CreateProduct = {
-  title: string;
-  price: number;
-  description: string;
-  categoryId: number;
-  images: string[];
-};
-
-export type UpdateProduct = Partial<CreateProduct>;
