@@ -1,6 +1,8 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import {XmarkSolid} from '@lineiconshq/free-icons'
+import {Lineicons} from '@lineiconshq/react-lineicons'
+import React, {useCallback, useEffect, useState} from 'react'
 
 import { t } from '_/i18n'
 import Button from '_/modules/common/components/Button'
@@ -22,6 +24,10 @@ const CartDrawer: React.FC = () => {
   const subtotal = calcSubtotal(items)
   const total = calcTotal(items)
 
+  const toggleOpen = useCallback(() => {
+    setOpen((v) => !v)
+  }, [setOpen])
+
   const isItemEmpty = items.length === 0
 
   return (
@@ -29,14 +35,16 @@ const CartDrawer: React.FC = () => {
       {/* Drawer overlay */}
       <div
         className={`fixed inset-0 bg-black/40 transition-opacity ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        onClick={() => setOpen(false)}
+        onClick={toggleOpen}
       />
 
       {/* Drawer panel */}
       <div className={`fixed top-0 right-0 h-full w-[90vw] max-w-md bg-[color:var(--surface)] text-[color:var(--foreground)] shadow-xl transform transition-transform ${open ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <h2 className="text-lg font-semibold">{t('cart.title')}</h2>
-          <Button variant="ghost" onClick={() => setOpen(false)}>{t('common.close')}</Button>
+          <Button variant="ghost" onClick={toggleOpen}>
+            <Lineicons icon={XmarkSolid} />
+          </Button>
         </div>
         <div className="p-4 overflow-auto h-[calc(100%-200px)]">
           {isItemEmpty ? (
@@ -75,16 +83,10 @@ const CartDrawer: React.FC = () => {
  */
 const CartDrawerController: React.FC<{ open: boolean; setOpen: (v: boolean) => void }> = ({ open, setOpen }) => {
   useEffect(() => {
-    const openHandler = () => setOpen(true)
-    const closeHandler = () => setOpen(false)
     const toggleHandler = () => setOpen(!open)
 
-    window.addEventListener('cart:open', openHandler)
-    window.addEventListener('cart:close', closeHandler)
     window.addEventListener('cart:toggle', toggleHandler)
     return () => {
-      window.removeEventListener('cart:open', openHandler)
-      window.removeEventListener('cart:close', closeHandler)
       window.removeEventListener('cart:toggle', toggleHandler)
     }
   }, [open, setOpen])

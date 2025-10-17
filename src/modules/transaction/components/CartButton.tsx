@@ -6,8 +6,7 @@ import React from 'react'
 
 import { t } from '_/i18n'
 import Button from '_/modules/common/components/Button'
-
-import { useCart } from '../context'
+import { useCart } from '_/modules/transaction/context'
 
 
 export type CartButtonProps = {

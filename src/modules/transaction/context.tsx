@@ -3,11 +3,11 @@
 import { useCallback } from 'react'
 
 import type { Product } from '_/modules/product/dto'
+import type { CartState } from '_/modules/transaction/state/cartSlice'
 import { useAppDispatch, useAppSelector } from '_/store'
 
 import { add as addAction, remove as removeAction, increase as increaseAction, decrease as decreaseAction, setQty as setQtyAction, clear as clearAction } from './state/cartSlice'
 
-import type { CartState } from './state/cartSlice'
 
 /**
  * Select the current cart state from the Redux store.
