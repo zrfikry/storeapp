@@ -19,7 +19,7 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     } else {
       root.classList.add('theme-light', 'light')
     }
-    try { window.localStorage.setItem('theme', mode) } catch {}
+    try { window.localStorage.setItem('theme', mode) } catch { /* empty */ }
   }, [mode])
 
   return <>{children}</>
