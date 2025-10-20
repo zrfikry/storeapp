@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "storeapp-d214d",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
